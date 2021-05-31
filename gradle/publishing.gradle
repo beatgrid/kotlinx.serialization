@@ -94,7 +94,14 @@ afterEvaluate {
 
 publishing {
     repositories {
-        PublishingKt.configureMavenPublication(delegate, project)
+        maven {
+            url = "https://artifactory.beatgrid.net/artifactory/libs-release-local"
+            credentials {
+                username = System.getenv('ARTIFACTORY_BEATGRID_CREDS_USR')
+                password = System.getenv('ARTIFACTORY_BEATGRID_CREDS_PSW')
+            }    
+        }
+        // PublishingKt.configureMavenPublication(delegate, project)
     }
 }
 

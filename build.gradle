@@ -148,7 +148,12 @@ subprojects {
             task.kotlinOptions.freeCompilerArgs += experimentalsEnabled
         }
     }
-
+    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all { task ->
+        task.kotlinOptions {
+            jvmTarget = '1.8'
+            freeCompilerArgs += ["-Xjvm-default=all"]
+        }
+    }
     apply from: rootProject.file('gradle/teamcity.gradle')
     // Configure publishing for some artifacts
     if (project.name != "benchmark" && project.name != "guide") {
